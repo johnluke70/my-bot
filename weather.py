@@ -1,5 +1,6 @@
 import requests
 from decimal import Decimal
+import mytoken
 
 def convertTemp(fahrenheit):
 
@@ -13,7 +14,7 @@ def convertTemp(fahrenheit):
 def getData(lat=51.1324, long=0.2637):
     # TODO put some sort of long lat lookup? yet another API???
     url = 'https://api.forecast.io/forecast/'
-    apikey = '483770733271a9b1858c273b9ad130d0'
+    apikey = mytoken.getToken('weather')
     lat = 51.1324
     long = 0.2637
 

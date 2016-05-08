@@ -3,7 +3,7 @@ import random
 import weather
 import rail
 import ccy
-import token
+import mytoken
 
 
 def run_function(inputstring):
@@ -66,10 +66,10 @@ def send_message(varSlackClient, varChannel, varMessage):
 
 if __name__ == "__main__":
 
-    slacktoken = token.getToken('slack')
+    slacktoken = mytoken.getToken('slack')
 
-    johnid = token.getSlack('userid')
-    johnchan = token.getSlack('userchan')
+    johnid = mytoken.getSlack('userid')
+    johnchan = mytoken.getSlack('userchan')
     message = 'Yo, this is a test message'
 
     sc = SlackClient(slacktoken)

@@ -1,5 +1,5 @@
 import requests
-import token
+import mytoken
 
 # https://openexchangerates.org/api/convert/19999.95/GBP/EUR?app_id=YOUR_APP_APP_ID
 
@@ -8,7 +8,7 @@ class CcyVars:
 
     base_url = 'https://openexchangerates.org/api/latest.json'
     amount = 1
-    ccy_token = token.getToken('ccy')
+    ccy_token = mytoken.getToken('ccy')
     full_url = base_url + '?app_id=' + ccy_token
 
     def getFull_url(self):
