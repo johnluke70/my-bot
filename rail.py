@@ -7,6 +7,7 @@ import datetime
 import subprocess
 import requests
 import json
+import token
 import re
 from string import ascii_letters, punctuation, whitespace
 from requests.auth import HTTPBasicAuth
@@ -30,8 +31,6 @@ def getCreds(vtype):
 def getStaticData():
     url = "https://datafeeds.networkrail.co.uk/ntrod/CifFileAuthenticate?type=CIF_HU_TOC_FULL_DAILY&day=toc-full"
     # set auth tokens
-    user = 'john@xyrho.com'
-    userpass = 'Switzerland.33'
     # This is a daily file, check it doesn't exist.
     # TODO fix the daily thing - just skips atm
     # TODO - can remove all checks. will download daily via cron....
@@ -52,7 +51,7 @@ def getStaticData():
                         print('Already have current file. Skipping...')
             else:
                 print("Don't have current file. Downloading...")
-                r = requests.get(url, auth=HTTPBasicAuth(user, userpass))
+                r = requests.get(url, auth=HTTPBasicAuth(token.getToken('railuser'), token.getToken('railpass')))
                 print(r.url)
 
 
