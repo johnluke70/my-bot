@@ -12,9 +12,13 @@ def run_function(inputstring):
     if inputargs[0] == 'weather':
         output = weather.getData()
     elif inputargs[0] == 'rail' or inputargs[0] == 'train':
-        output = rail.getJourney(inputargs[1:])
+        output = rail.getJourney(inputargs[1], inputargs[2], inputargs[3])
     elif inputargs[0] == 'ccy':
-        output = ccy.convertAmount(inputargs[1:])
+        ccypair = inputargs[1].split('/')
+        if len(inputargs) > 2:
+            output = ccy.convertAmount(ccypair[0], ccypair[1], int(inputargs[2]))
+        else:
+            output = ccy.convertAmount(ccypair[0], ccypair[1])
     else:
         output = 'There was an error with' + inputstring
     return output
@@ -45,8 +49,8 @@ def parse_text(varMessage):
         retString = run_function(varMessage.replace('?', ''))
         return retString
 
-    elif varMessage in greetings:
-        greetings.remove(varMessage)
+    elif varMessage.lower() in greetings:
+        greetings.remove(varMessage.lower())
         print('responding nicely')
         return greetings[random.randrange(0, len(greetings))]
 
@@ -57,7 +61,7 @@ def parse_text(varMessage):
 
 
 def send_message(varSlackClient, varChannel, varMessage):
-    if varMessage == None:
+    if varMessage is None:
         print('sending null msg')
         # do nothing
     else:
